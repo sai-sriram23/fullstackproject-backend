@@ -35,31 +35,5 @@ public class UserController {
         }
         return ResponseEntity.status(401).body(response);
     }
-
-    @Autowired
-    private com.example.aiocr.service.BiometricService biometricService;
-
-    @GetMapping("/biometric/challenge")
-    public ResponseEntity<Map<String, String>> getChallenge(@RequestParam String username) {
-        String challenge = biometricService.generateChallenge(username);
-        Map<String, String> response = new HashMap<>();
-        response.put("challenge", challenge);
-        return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/biometric/verify")
-    public ResponseEntity<Map<String, String>> verifyBiometric(@RequestBody Map<String, String> data) {
-        String username = data.get("username");
-        String responseData = data.get("response");
-        boolean success = biometricService.verifyLogin(username, responseData);
-        
-        Map<String, String> response = new HashMap<>();
-        if (success) {
-            response.put("message", "Login successful");
-            return ResponseEntity.ok(response);
-        }
-        response.put("message", "Biometric verification failed");
-        return ResponseEntity.status(401).body(response);
-    }
 }
 
