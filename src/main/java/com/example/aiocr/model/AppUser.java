@@ -12,6 +12,20 @@ public class AppUser {
     private String email;
     @Column(nullable = false)
     private String password;
+
+    @Column(columnDefinition = "TEXT")
+    private String biometricData; // Stores serialized WebAuthn credentials
+
+    public AppUser() {}
+
+    public String getBiometricData() {
+        return biometricData;
+    }
+
+    public void setBiometricData(String biometricData) {
+        this.biometricData = biometricData;
+    }
+
     public Long getId() {
         return id;
     }

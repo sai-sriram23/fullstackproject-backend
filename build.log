@@ -1,0 +1,41 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.example:ai-ocr-backend >---------------------
+[INFO] Building AI OCR App Backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ai-ocr-backend ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ai-ocr-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 12 source files with javac [debug parameters release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/fullstack-project/firstproject/firstproject/src/main/java/com/example/aiocr/service/BiometricService.java:[28,53] incompatible types: java.util.Optional<com.example.aiocr.model.AppUser> cannot be converted to com.example.aiocr.model.AppUser
+[ERROR] /C:/fullstack-project/firstproject/firstproject/src/main/java/com/example/aiocr/service/BiometricService.java:[30,17] cannot find symbol
+  symbol:   method setBiometricData(java.lang.String)
+  location: variable user of type com.example.aiocr.model.AppUser
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.849 s
+[INFO] Finished at: 2026-03-13T22:27:16+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project ai-ocr-backend: Compilation failure: Compilation failure: 
+[ERROR] /C:/fullstack-project/firstproject/firstproject/src/main/java/com/example/aiocr/service/BiometricService.java:[28,53] incompatible types: java.util.Optional<com.example.aiocr.model.AppUser> cannot be converted to com.example.aiocr.model.AppUser
+[ERROR] /C:/fullstack-project/firstproject/firstproject/src/main/java/com/example/aiocr/service/BiometricService.java:[30,17] cannot find symbol
+[ERROR]   symbol:   method setBiometricData(java.lang.String)
+[ERROR]   location: variable user of type com.example.aiocr.model.AppUser
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
