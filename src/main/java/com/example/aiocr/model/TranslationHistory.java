@@ -3,6 +3,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 @Entity
 public class TranslationHistory {
@@ -11,7 +12,9 @@ public class TranslationHistory {
     private Long id;
     private String username;
     private String type;
+    @Column(columnDefinition = "TEXT")
     private String sourceText;
+    @Column(columnDefinition = "TEXT")
     private String resultText;
     private LocalDateTime timestamp;
     public TranslationHistory() {
