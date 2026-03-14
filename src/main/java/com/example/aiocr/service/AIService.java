@@ -30,6 +30,28 @@ public class AIService {
     @Value("${ollama.model.id}")
     private String ollamaModel;
 
+    public Map<String, String> getAIConfig() {
+        Map<String, String> config = new HashMap<>();
+        config.put("provider", aiProvider);
+        config.put("ollamaModel", ollamaModel);
+        config.put("poeModel", poeModel);
+        return config;
+    }
+
+    public String proxyOllama(Map<String, Object> payload) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(payload, headers);
+            // Use the base URL but ensure it hits the right endpoint
+            String endpoint = ollamaUrl.contains("/api/chat") ? ollamaUrl : ollamaUrl + "/api/chat";
+            return restTemplate.postForObject(endpoint, entity, String.class);
+        } catch (Exception e) {
+            return "{\"error\": \"Backend Proxy Failure: " + e.getMessage() + "\"}";
+        }
+    }
+
     public String generateResponse(String prompt) {
         return generateResponse(prompt, null);
     }

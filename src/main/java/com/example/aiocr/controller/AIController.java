@@ -15,6 +15,16 @@ public class AIController {
     @Autowired
     private AIService aiService;
 
+    @GetMapping("/config")
+    public Map<String, String> getAIConfig() {
+        return aiService.getAIConfig();
+    }
+
+    @PostMapping("/ollama-proxy")
+    public String proxyOllama(@RequestBody Map<String, Object> payload) {
+        return aiService.proxyOllama(payload);
+    }
+
     @PostMapping("/chat")
     public Map<String, String> chatWithAI(@RequestBody Map<String, String> payload) {
         String input = payload.get("input");
