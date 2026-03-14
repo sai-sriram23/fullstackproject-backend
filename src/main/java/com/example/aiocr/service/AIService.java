@@ -45,7 +45,9 @@ public class AIService {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request, headers);
 
         try {
+            System.out.println("Poe API Request: " + request);
             Map<String, Object> response = restTemplate.postForObject(url, entity, Map.class);
+            System.out.println("Poe API Response: " + response);
             if (response != null && response.containsKey("choices")) {
                 List<Map<String, Object>> choices = (List<Map<String, Object>>) response.get("choices");
                 if (!choices.isEmpty()) {
@@ -57,6 +59,7 @@ public class AIService {
             return "Poe Nexus Error: Deployment cluster returned empty logic set.";
             
         } catch (Exception e) {
+            System.err.println("Poe Link Failure: " + e.getMessage());
             return "Poe Link Failure: " + e.getMessage();
         }
     }
