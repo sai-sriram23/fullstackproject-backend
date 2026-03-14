@@ -69,15 +69,25 @@ public class AIService {
             System.out.println("Poe API Request: " + request);
             Map<String, Object> response = restTemplate.postForObject(url, entity, Map.class);
             System.out.println("Poe API Response: " + response);
-            if (response != null && response.containsKey("choices")) {
-                List<Map<String, Object>> choices = (List<Map<String, Object>>) response.get("choices");
-                if (!choices.isEmpty()) {
-                    Map<String, Object> choice = choices.get(0);
-                    Map<String, String> message = (Map<String, String>) choice.get("message");
-                    return message.get("content");
+            
+            if (response != null) {
+                if (response.containsKey("choices")) {
+                    List<Map<String, Object>> choices = (List<Map<String, Object>>) response.get("choices");
+                    if (!choices.isEmpty()) {
+                        Map<String, Object> choice = choices.get(0);
+                        Map<String, String> message = (Map<String, String>) choice.get("message");
+                        return message.get("content");
+                    }
+                } else if (response.containsKey("error")) {
+                    Map<String, Object> error = (Map<String, Object>) response.get("error");
+                    return "Poe API Error: " + error.get("message");
                 }
             }
             return "Poe Nexus Error: Deployment cluster returned empty logic set.";
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+            String errorResponse = e.getResponseBodyAsString();
+            System.err.println("Poe API HTTP Error: " + errorResponse);
+            return "Poe API HTTP Failure: " + e.getStatusCode() + " - " + errorResponse;
         } catch (Exception e) {
             System.err.println("Poe Link Failure: " + e.getMessage());
             return "Poe Link Failure: " + e.getMessage();

@@ -61,6 +61,19 @@ public class AIController {
         return result;
     }
 
+    @PostMapping("/assistant")
+    public Map<String, String> aiAssistant(@RequestBody Map<String, String> payload) {
+        String input = payload.get("input");
+        String provider = payload.get("provider");
+        
+        // General assistant prompt
+        String response = aiService.generateResponse(input, provider);
+        
+        Map<String, String> result = new HashMap<>();
+        result.put("response", response);
+        return result;
+    }
+
     @PostMapping("/translate-insight")
     public Map<String, String> getTranslationInsight(@RequestBody Map<String, String> payload) {
         String text = payload.get("text");
