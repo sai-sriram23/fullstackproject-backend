@@ -19,6 +19,7 @@ public class AIController {
     public Map<String, String> chatWithAI(@RequestBody Map<String, String> payload) {
         String input = payload.get("input");
         String country = payload.get("country");
+        String provider = payload.get("provider");
         
         String prompt = "[SYSTEM: Act as a 'Native Cultural Strategist' living in " + country + ". Your goal is to help a foreigner integrate perfectly.] " +
                         "A visitor in your country says: '" + input + "'. " +
@@ -27,7 +28,7 @@ public class AIController {
                         "2. THE VIBE CHECK: Describe how a local person would feel or react. " +
                         "3. THE ACTION: Give a step-by-step native strategy to win them over or handle it correctly.";
         
-        String response = aiService.generateResponse(prompt);
+        String response = aiService.generateResponse(prompt, provider);
         
         Map<String, String> result = new HashMap<>();
         result.put("response", response);
@@ -39,13 +40,14 @@ public class AIController {
         String text = payload.get("text");
         String country = payload.get("country");
         String goal = payload.get("goal");
+        String provider = payload.get("provider");
 
         String prompt = "[SYSTEM: Act as a master 'Social Decryption Engine' specialized in " + country + ".] Analyze the hidden layers of this interaction: '" + text + "'. " +
                         "User's goal: '" + goal + "'. " +
                         "You MUST return ONLY a JSON block. " +
                         "JSON Schema: { \"tone\": \"...\", \"politeness\": 0-100, \"intensity\": \"...\", \"subtext\": \"Deep cultural subtext\", \"recommendations\": [\"Casual: ...\", \"Formal: ...\", \"Inquisitive: ...\"] }";
 
-        String response = aiService.generateResponse(prompt);
+        String response = aiService.generateResponse(prompt, provider);
 
         // Robust JSON extraction
         String cleaned = response;
@@ -64,6 +66,7 @@ public class AIController {
         String text = payload.get("text");
         String translation = payload.get("translation");
         String targetLang = payload.get("targetLang");
+        String provider = payload.get("provider");
 
         String prompt = "[SYSTEM: Act as a professional linguist and cultural strategist.] " +
                         "The user translated: '" + text + "' into " + targetLang + " as: '" + translation + "'. " +
@@ -72,7 +75,7 @@ public class AIController {
                         "3. Give 1 native 'Pro Tip' to make it sound 100% realistic. " +
                         "Keep it short and premium.";
 
-        String response = aiService.generateResponse(prompt);
+        String response = aiService.generateResponse(prompt, provider);
         Map<String, String> result = new HashMap<>();
         result.put("insight", response);
         return result;
